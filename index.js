@@ -69,6 +69,17 @@ async function handleDocument(msg, source) {
 
     console.log('  -> Media downloaded:', media.filename, '|', media.mimetype);
 
+    // Base64 length * 0.75 gives approximate byte size
+    const estimatedBytes = Math.round(media.data.length * 0.75);
+    const estimatedMB = (estimatedBytes / (1024 * 1024)).toFixed(1);
+    console.log(`  -> Estimated file size: ${estimatedMB} MB`);
+
+    const MAX_MB = 50;
+    if (estimatedBytes > MAX_MB * 1024 * 1024) {
+        console.log(`  -> Skipping: file too large (${estimatedMB} MB > ${MAX_MB} MB limit)`);
+        return;
+    }
+
     try {
         const sent = await client.sendMessage(MY_NUMBER, media, {
             caption: `Echo: ${media.filename || 'document'}`,
