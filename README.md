@@ -34,7 +34,8 @@ After the first scan, the session is saved locally and you won't need to scan ag
 - Uses [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js) to connect via WhatsApp Web
 - Listens on the `message_create` event for messages sent from your own account
 - Only reacts to `document` type messages sent to yourself
-- Downloads the document and sends it back as a media upload
+- Downloads the document and sends it back as a media upload (no caption)
+- Skips files larger than 50 MB to prevent Puppeteer from crashing
 - Loop protection: tracks sent message IDs to prevent infinite echo loops
 
 ## Files
