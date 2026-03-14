@@ -81,9 +81,7 @@ async function handleDocument(msg, source) {
     }
 
     try {
-        const sent = await client.sendMessage(MY_NUMBER, media, {
-            caption: `Echo: ${media.filename || 'document'}`,
-        });
+        const sent = await client.sendMessage(MY_NUMBER, media);
         sentEchoIds.add(sent.id._serialized);
         console.log('  -> Document sent back successfully. Echo ID tracked:', sent.id._serialized);
     } catch (err) {
